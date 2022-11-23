@@ -24,5 +24,12 @@ io.on("connection", newConnection); //which event we're waiting for
 
 function newConnection(newSocket) {
   console.log(newSocket.id); //print all the information about the server-client,
-  //mettendo id mi printa solo l'id del client
+  //mettendo id mi printa solo l'id del client - connection
+
+  newSocket.on("mouse", mouseReceived);
+
+  function mouseReceived(dataReceived) {
+    console.log(dataReceived);
+    newSocket.broadcast.emit("mouseBroadcast", dataReceived);
+  }
 }
